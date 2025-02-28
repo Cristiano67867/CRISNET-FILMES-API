@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from filmesJson import FILMES
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -14,4 +15,5 @@ def list_movies():
     return jsonify(FILMES)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    PORT = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0', port=PORT)
