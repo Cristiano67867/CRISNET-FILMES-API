@@ -1,0 +1,17 @@
+from flask import Flask, jsonify
+from flask_cors import CORS
+from filmesJson import FILMES
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({"message": "Hello to CRISNET FILME API"})
+
+@app.route('/movies', methods=['GET'])
+def list_movies():
+    return jsonify(FILMES)
+
+if __name__ == "__main__":
+    app.run(debug=True)
