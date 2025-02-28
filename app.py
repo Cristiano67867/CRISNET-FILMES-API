@@ -13,6 +13,10 @@ def home():
 @app.route('/movies', methods=['GET'])
 def list_movies():
     return jsonify(FILMES)
+    
+@app.route('/static/movies<path:filename>', methods=['GET'])
+def server_image(filename):
+    return send_from_directory("static/movies", filename)
 
 if __name__ == "__main__":
     PORT = int(os.environ.get("PORT", 5000))
