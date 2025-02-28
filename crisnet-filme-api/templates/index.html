@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consumindo API</title>
+</head>
+<body>
+  <h1>Filmes Populares</h1>
+  <ul id="movies-list"></ul>
+
+  <script>
+    // URL da sua API
+    const apiURL = 'http://127.0.0.1:5000/filmes';
+
+    // Função para buscar dados da API
+    async function fetchMovies() {
+      try {
+        const response = await fetch(apiURL); // Faz uma requisição GET
+        const movies = await response.json(); // Converte a resposta para JSON
+
+        // Renderiza os filmes na página
+        const list = document.getElementById('movies-list');
+        movies.forEach(movie => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${movie.title} (${movie.year})`;
+          list.appendChild(listItem);
+        });
+      } catch (error) {
+        console.error('Erro ao buscar filmes:', error);
+      }
+    }
+
+    // Chama a função para buscar os filmes ao carregar a página
+    fetchMovies();
+  </script>
+</body>
+</html>
